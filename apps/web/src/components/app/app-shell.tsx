@@ -181,7 +181,7 @@ export function AppShell() {
           {sidebar}
         </Drawer>
 
-        <main className="flex min-h-0 flex-1 flex-col">
+        <main className="flex min-h-0 min-w-0 flex-1 flex-col">
           {selectedConversation ? (
             <ChatWindow
               conversation={selectedConversation}
@@ -199,7 +199,7 @@ export function AppShell() {
           ) : (
             <>
               {/* Mobile: full-width conversation list with a top bar. */}
-              <div className="flex min-h-0 flex-1 flex-col md:hidden">
+              <div className="flex min-h-0 min-w-0 flex-1 flex-col md:hidden">
                 <header className="flex items-center gap-2 border-b border-line bg-surface px-2 py-2">
                   <IconButton label="Open menu" onClick={() => setDrawerOpen(true)}>
                     <MenuIcon className="h-5 w-5" aria-hidden="true" />

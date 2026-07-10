@@ -29,7 +29,7 @@ export function ChatWindow({
   onMockAction,
 }: ChatWindowProps) {
   return (
-    <section className="flex h-full min-h-0 flex-col bg-page" aria-label="Conversation">
+    <section className="flex h-full min-h-0 min-w-0 flex-col bg-page" aria-label="Conversation">
       <ChatHeader conversation={conversation} onBack={onBack} onMockAction={onMockAction} />
       <MessageList conversation={conversation} currentUserId={currentUserId} onRetry={onRetry} />
       <Composer value={draft} onChange={onDraftChange} onSend={onSend} offline={offline} />
