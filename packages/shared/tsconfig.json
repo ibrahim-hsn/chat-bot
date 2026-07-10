@@ -1,0 +1,7 @@
+{
+  "extends": "@one2one/config/tsconfig/base.json",
+  "compilerOptions": {
+    "noEmit": true
+  },
+  "include": ["src/**/*.ts"]
+}
