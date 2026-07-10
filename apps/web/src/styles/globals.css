@@ -1,0 +1,64 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+ * Design tokens (spec §5). Light, calm surfaces with a strong blue accent.
+ * Single source of truth for color; Tailwind maps utilities to these vars.
+ */
+:root {
+  --color-primary: #00aaff;
+  --color-primary-hover: #0098e6;
+  --color-primary-strong: #0077b8;
+  --color-primary-soft: #e8f7ff;
+  --color-page: #f5fafd;
+  --color-surface: #ffffff;
+  --color-surface-muted: #edf6fa;
+  --color-border: #d8e8f0;
+  --color-text: #173042;
+  --color-text-muted: #647785;
+  --color-success: #20875a;
+  --color-warning: #b56816;
+  --color-danger: #c83b3b;
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-page text-ink antialiased;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  /* Visible focus indicator for keyboard users (spec: accessibility). */
+  :focus-visible {
+    @apply outline-none ring-2 ring-primary ring-offset-2 ring-offset-page;
+  }
+
+  /* Don't show the focus ring for pointer/mouse clicks. */
+  :focus:not(:focus-visible) {
+    outline: none;
+  }
+
+  ::selection {
+    background: var(--color-primary-soft);
+    color: var(--color-text);
+  }
+}
+
+@layer utilities {
+  /* Respect the user's reduced-motion preference (spec: reduced motion). */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
