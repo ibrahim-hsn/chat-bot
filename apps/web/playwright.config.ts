@@ -3,6 +3,11 @@ import { defineConfig, devices } from "@playwright/test";
 const PORT = 3100;
 const baseURL = `http://127.0.0.1:${PORT}`;
 
+// Optional escape hatch for environments that can't download Playwright's
+// bundled Chromium: point PW_CHROMIUM_PATH at a compatible Chromium binary.
+// Unset in CI, so CI uses the normal bundled browser.
+const chromiumExecutablePath = process.env.PW_CHROMIUM_PATH;
+
 export default defineConfig({
   testDir: "./e2e",
   timeout: 30_000,
@@ -13,6 +18,14 @@ export default defineConfig({
   use: {
     baseURL,
     trace: "on-first-retry",
+    ...(chromiumExecutablePath
+      ? {
+          launchOptions: {
+            executablePath: chromiumExecutablePath,
+            args: ["--no-sandbox", "--disable-gpu", "--disable-dev-shm-usage"],
+          },
+        }
+      : {}),
   },
   projects: [
     { name: "desktop", use: { ...devices["Desktop Chrome"] } },

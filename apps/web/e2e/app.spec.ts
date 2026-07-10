@@ -18,8 +18,9 @@ test.describe("app shell (mock preview)", () => {
 
   test("opens the create-room modal and reveals a copyable code", async ({ page }) => {
     await page.goto("/app");
+    // "New room" lives in the desktop sidebar; the mobile top bar has "Create room".
     await page
-      .getByRole("button", { name: /create room/i })
+      .getByRole("button", { name: /new room|create room/i })
       .first()
       .click();
     const dialog = page.getByRole("dialog");
